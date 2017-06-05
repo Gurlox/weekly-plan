@@ -1,0 +1,63 @@
+{% extends 'PlanBundle::base.html.twig' %}
+
+{% block title %}Rejestracja{% endblock %}
+
+{% block stylesheets %}
+    {% stylesheets
+        '@PlanBundle/Resources/public/css/user/user.css'
+        '@PlanBundle/Resources/public/css/user/register.css' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block content %}
+    <div class="wrapper">
+        <div class="box">
+            <div class="form">
+                {{ form_start(form, { 'attr': {'id': 'register-form', 'novalidate': 'novalidate'} }) }}
+                    <section>
+                        <label>Login</label>
+                        {{ form_widget(form.username) }}
+                    </section>
+                    <section>
+                        <label>Email </label>
+                        {{ form_widget(form.email) }}
+                    </section>
+                    <section>
+                        <label>Hasło</label>
+                        {{ form_widget(form.password.first) }}
+                    </section>
+                    <section>
+                        <label>Powtórz hasło</label>
+                        {{ form_widget(form.password.second) }}
+                    </section>
+
+                    <div class="end-form">
+                        lub <a href="{{ path('login') }}">Zaloguj się</a>.
+                        <button type="submit">Rejestruj</button>
+                    </div>
+                {{ form_end(form) }}
+                <ul id="form-error"></ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        var registrationPath = "{{ url('commit_registration') }}",
+            redirect = "{{ url('front_page') }}";
+    </script>
+    {% verbatim %}
+        <script id="register-errors-template" type="text/template">
+            {{#.}}
+                <li>{{.}}</li>
+            {{/.}}
+        </script>
+    {% endverbatim %}
+    {% javascripts
+        '@jquery'
+        '@mustache'
+        '@PlanBundle/Resources/public/js/user/register.js' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

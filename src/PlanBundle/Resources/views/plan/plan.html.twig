@@ -1,0 +1,113 @@
+{% extends 'PlanBundle::base.html.twig' %}
+
+{% block title %}Plan tygodnia{% endblock %}
+
+{% block stylesheets %}
+    {% stylesheets '@PlanBundle/Resources/public/css/plan/plan.css' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="wrapper">
+        <div class="box">
+            <div class="nav-bar">
+                <ul>
+                    <li><a href="{{ path('plan', { 'day': 'poniedzialek' }) }}">PONIEDZIAŁEK</a></li>
+                    <li><a href="{{ path('plan', { 'day': 'wtorek' }) }}">WTOREK</a></li>
+                    <li><a href="{{ path('plan', { 'day': 'sroda' }) }}">ŚRODA</a></li>
+                    <li><a href="{{ path('plan', { 'day': 'czwartek' }) }}">CZWARTEK</a></li>
+                    <li><a href="{{ path('plan', { 'day': 'piatek' }) }}">PIĄTEK</a></li>
+                    <li><a href="{{ path('plan', { 'day': 'sobota' }) }}">SOBOTA</a></li>
+                    <li><a href="{{ path('plan', { 'day': 'niedziela' }) }}">NIEDZIELA</a></li>
+                </ul>
+            </div>
+            <div class="content">
+                <div class="top">
+                    <h1>
+                    {% if day == 1 %}
+                        Poniedziałek
+                    {% elseif day == 2 %}
+                        Wtorek
+                    {% elseif day == 3 %}
+                        Środa
+                    {% elseif day == 4 %}
+                        Czwartek
+                    {% elseif day == 5 %}
+                        Piątek
+                    {% elseif day == 6 %}
+                        Sobota
+                    {% elseif day == 7 %}
+                        Niedziela
+                    {% endif %}
+                    </h1>
+
+                    <span class="user">{{ app.user.username }} | <a href="{{ url("logout") }}" class="logout">Wyloguj</a></a>
+                </div>
+                <div class="bottom">
+                    <h2>Dodaj nowe zadanie</h2>
+                    <div id="form-container">
+                        {{ form_start(form, { 'attr': {'id': 'task-form', "novalidate": "novalidate"} }) }}
+                            {{ form_row(form._token) }}
+                            <div class="form-inputs">
+                                <section>
+                                    <label>Zadanie</label>
+                                    {{ form_widget(form.task) }}
+                                </section>
+                                <section>
+                                    <label>Czas</label>
+                                    {{ form_widget(form.start_time) }}
+                                    {{ form_widget(form.end_time) }}
+                                </section>
+                            </div>
+                            <button type="submit">Zapisz</button>
+                        {{ form_end(form, {'render_rest': false}) }}
+                        <ul id="form-error"></ul>
+                    </div>
+
+                    {% if tasks is empty %}
+                        <h2>Wygląda na to, że nic tu nie ma</h2>
+                    {% else %}
+                        <table>
+                        {% for task in tasks %}
+                            <tr data-id="{{ task.id }}">
+                                <td>
+                                    {{ task.startTime|date("H:i") }} - {{ task.endTime|date("H:i") }}
+                                </td>
+                                <td>
+                                    {{ task.task }}
+                                </td>
+                                <td class="delete-task">
+                                    X
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </table>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        var createTaskPath = "{{ url('create_task') }}",
+            deleteTaskPath = "{{ url('delete_task') }}",
+            routeDay = {{ day }};
+
+    </script>
+    {% verbatim %}
+        <script id="task-errors-template" type="text/template">
+            {{#.}}
+                <li>{{.}}</li>
+            {{/.}}
+        </script>
+    {% endverbatim %}
+    {% javascripts
+        '@jquery'
+        '@mustache'
+        '@PlanBundle/Resources/public/js/plan/*' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

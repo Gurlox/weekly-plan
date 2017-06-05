@@ -1,3 +1,27 @@
-homepage:
-  path: /
-  defaults: { _controller: PlanBundle:Index:homepage }
+front_page:
+    path: /
+    defaults: { _controller: PlanBundle:Plan:redirect }
+register:
+    path: /register
+    defaults: { _controller: PlanBundle:User:register }
+commit_registration:
+    path: /register/commit
+    defaults: { _controller: PlanBundle:User:registerCommit }
+login:
+    path: /login
+    defaults: { _controller: PlanBundle:Security:login }
+logout:
+    path: /logout
+plan:
+    path: /{day}
+    defaults: { _controller: PlanBundle:Plan:plan }
+    requirements:
+        day: 'poniedzialek|wtorek|sroda|czwartek|piatek|sobota|niedziela'
+create_task:
+    path: /create-task
+    defaults: { _controller: PlanBundle:Plan:createTask }
+    methods:  [POST]
+delete_task:
+    path: /delete-task
+    defaults: { _controller: PlanBundle:Plan:deleteTask }
+    methods:  [DELETE]

@@ -69,3 +69,16 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+assetic:
+    debug:          '%kernel.debug%'
+    use_controller: '%kernel.debug%'
+    filters:
+        cssrewrite: ~
+    assets:
+        jquery:
+            inputs:
+                - '@PlanBundle/Resources/public/js/thirdparty/jquery-3.2.0.min.js'
+        mustache:
+            inputs:
+                - '@PlanBundle/Resources/public/js/thirdparty/mustache.min.js'

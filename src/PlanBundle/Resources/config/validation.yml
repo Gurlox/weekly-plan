@@ -1,0 +1,46 @@
+PlanBundle\Entity\Plan:
+    constraints:
+        - PlanBundle\Validator\Constraints\TaskTime: ~
+    properties:
+        startTime:
+            - Time:
+                message: 'Zły format czasu'
+            - NotBlank:
+                message: 'Czas rozpoczęcia nie może być pusty'
+        endTime:
+            - Time:
+                message: 'Zły format czasu'
+            - NotBlank:
+                message: 'Czas zakończenia nie może być pusty'
+        day:
+            - Choice:
+                choices:  [1, 2, 3, 4, 5, 6, 7]
+                message: 'Niepoprawny format dnia'
+            - NotBlank:
+                message: 'Musisz wybrać dzień'
+        task:
+            - Length:
+                min: 2
+                max: 100
+                minMessage: 'Zadanie musi mieć conajmniej {{ limit }} znaki'
+                maxMessage: 'Zadanie może mieć conajwyżej {{ limit }} znaków'
+            - NotBlank:
+                message: 'Zadanie nie może byc puste'
+PlanBundle\Entity\User:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: [email, username]
+            errorPath: email
+            message: 'Ten email jest już zajęty'
+            errorPath: username
+            message: 'Ten login jest już zajęty'
+    properties:
+        email:
+            - NotBlank:
+                message: "Email nie może być pusty"
+            - Email:
+                message: "Niepoprawny format emaila"
+                checkMX: true
+        username:
+            - NotBlank:
+                message: "Login nie może być pusty"

@@ -1,0 +1,83 @@
+.box {
+    width: 70%;
+    background-color: white;
+    -webkit-box-shadow: 2px 3px 34px 6px rgba(0,0,0,0.32);
+    -moz-box-shadow: 2px 3px 34px 6px rgba(0,0,0,0.32);
+    box-shadow: 2px 3px 34px 6px rgba(0,0,0,0.32);
+    min-height: 35rem;
+}
+
+.nav-bar {
+    width: 25%;
+    min-height: 35rem;
+    float: left;
+    background-color: rgb(34, 34, 34);
+    color: white;
+}
+
+.nav-bar a {
+    color: rgb(228, 228, 228);
+    text-decoration: none;
+}
+
+.content {
+    width: 75%;
+    float: right;
+}
+
+.nav-bar ul {
+    list-style-type: none;
+}
+
+.nav-bar ul li {
+    font-size: 1.5rem;
+}
+
+.top {
+    color: rgb(13, 13, 13);
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 2rem;
+    background: rgb(154, 45, 45);
+}
+
+.top h1 {
+    margin: 0;
+}
+
+.top .user {
+    font-weight: bold;
+    margin-top: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.bottom {
+    margin: 1rem;
+}
+
+label {
+    font-weight: bold;
+    margin-right: 0.5rem;
+}
+
+#form-container {
+    display: flex;
+    justify-content: center;
+}
+
+#form-container section {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+#form-container .form-inputs {
+    float: left;
+}
+
+#form-container button {
+    float: right;
+    height: 3rem;
+    margin-left: 0.5rem;
+}

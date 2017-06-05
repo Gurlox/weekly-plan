@@ -2,11 +2,16 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>{% block title %}{% endblock %}</title>
+        <title>Plan Tygodnia | {% block title %}{% endblock %}</title>
+        {% stylesheets '@PlanBundle/Resources/public/css/main.css' %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <main>
+            {% block content %}{% endblock %}
+        </main>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

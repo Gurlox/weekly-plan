@@ -1,0 +1,18 @@
+.box {
+    position: relative;
+    margin-top: 10%;
+    width: 25%;
+    background-color: white;
+    -webkit-box-shadow: 2px 3px 34px 6px rgba(0,0,0,0.32);
+    -moz-box-shadow: 2px 3px 34px 6px rgba(0,0,0,0.32);
+    box-shadow: 2px 3px 34px 6px rgba(0,0,0,0.32);
+    min-height: 10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+label {
+    font-weight: bold;
+    font-size: 1.5rem;
+}

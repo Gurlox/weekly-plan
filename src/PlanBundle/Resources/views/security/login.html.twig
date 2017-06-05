@@ -1,0 +1,41 @@
+{% extends 'PlanBundle::base.html.twig' %}
+
+{% block title %}Logowanie{% endblock %}
+
+{% block stylesheets %}
+    {% stylesheets
+        '@PlanBundle/Resources/public/css/user/login.css'
+        '@PlanBundle/Resources/public/css/user/user.css' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block content %}
+    <div class="wrapper">
+        <div class="box">
+            <div style="position: absolute; right: 1rem; bottom: 1rem;">
+                Nie masz konta? <a href="{{ path('register') }}">Zarejestruj się</a>.
+            </div>
+            {% if error %}
+            <div class="login-error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+
+            <form action="{{ path('login') }}" method="post">
+            <div class="login-inputs">
+                <div>
+                    <label for="username">Login</label>
+                    <input type="text" id="username" name="_username" value="{{ last_username }}" />
+                </div>
+                <div>
+                    <label for="password">Hasło</label>
+                    <input type="password" id="password" name="_password" />
+                </div>
+            </div>
+
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+            <button type="submit">Zaloguj</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

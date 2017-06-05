@@ -1,0 +1,16 @@
+button {
+    float: right;
+    height: 3rem;
+    margin-top: 0.5rem;
+
+}
+
+.login-inputs {
+    float: left;
+}
+
+.login-error {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+}
